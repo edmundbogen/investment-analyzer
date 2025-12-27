@@ -11,6 +11,8 @@ from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 import smtplib
+import urllib.request
+import json
 
 # Load environment variables from .env file
 load_dotenv()
@@ -48,6 +50,40 @@ EMAIL_USER = os.environ.get('EMAIL_USER', '')
 EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD', '')
 EMAIL_FROM = os.environ.get('EMAIL_FROM', 'Edmund Bogen Team <info@bogenhomes.com>')
 
+# Google Sheet webhook URL
+GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwwAdkoAtsjAq48UXDiRb9kkEVnc_QFfSqTac5f5qnz0v5JcaDKJsW-4TUAYi8MJVH4bQ/exec'
+
+
+def send_to_google_sheet(data):
+    """Send lead data to Google Sheet."""
+    try:
+        sheet_data = {
+            'userName': data.get('userName', ''),
+            'userEmail': data.get('userEmail', ''),
+            'propertyAddress': data.get('propertyAddress', ''),
+            'purchasePrice': data.get('purchasePrice', 0),
+            'downPayment': data.get('downPayment', 0),
+            'monthlyRent': data.get('grossRentMonthly', 0),
+            'capRate': f"{data.get('capRate', 0) * 100:.2f}%",
+            'cashOnCash': f"{data.get('cashOnCash', 0) * 100:.2f}%",
+            'dscr': f"{data.get('dscr', 0):.2f}",
+            'monthlyCashFlow': data.get('monthlyCashFlow', 0)
+        }
+
+        req = urllib.request.Request(
+            GOOGLE_SHEET_URL,
+            data=json.dumps(sheet_data).encode('utf-8'),
+            headers={'Content-Type': 'application/json'},
+            method='POST'
+        )
+
+        with urllib.request.urlopen(req, timeout=10) as response:
+            print(f"Google Sheet updated: {response.status}")
+            return True
+    except Exception as e:
+        print(f"Error sending to Google Sheet: {str(e)}")
+        return False
+
 
 @app.route('/')
 def index():
@@ -60,6 +96,9 @@ def generate_report():
     """Generate PDF report and return it for download."""
     try:
         data = request.get_json()
+
+        # Send lead data to Google Sheet (non-blocking)
+        send_to_google_sheet(data)
 
         # Generate PDF
         pdf_buffer = generate_pdf(data)
