@@ -44,3 +44,4 @@ instance/
 
 # Test files
 *.pdf
+.vercel
