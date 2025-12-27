@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Property Analyzer | Edmund Bogen Team</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-circle">EB</div>
+                <div class="logo-text">
+                    <span class="team-name">THE EDMUND BOGEN TEAM</span>
+                    <span class="company-name">AT DOUGLAS ELLIMAN REAL ESTATE</span>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="https://www.bogenhomes.com" target="_blank" class="nav-link">VISIT WEBSITE</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>INVESTMENT PROPERTY ANALYZER</h1>
+            <p>Professional analysis for smart real estate investments throughout South Florida</p>
+            <div class="scroll-indicator">
+                <span>SCROLL DOWN TO BEGIN</span>
+                <div class="chevron"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Form Section -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Introduction -->
+            <div class="intro-section">
+                <div class="accent-bar"></div>
+                <h2>ANALYZE YOUR INVESTMENT</h2>
+                <p>Enter the property details below for a comprehensive investment analysis. Your personalized report will be emailed to you as a PDF.</p>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <span>Your Info</span>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <span>Property</span>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <span>Income</span>
+                </div>
+                <div class="step" data-step="4">
+                    <div class="step-number">4</div>
+                    <span>Expenses</span>
+                </div>
+                <div class="step" data-step="5">
+                    <div class="step-number">5</div>
+                    <span>Financing</span>
+                </div>
+                <div class="step" data-step="6">
+                    <div class="step-number">6</div>
+                    <span>Review</span>
+                </div>
+            </div>
+
+            <form id="investmentForm" class="investment-form">
+                <!-- Step 1: User Information -->
+                <div class="form-step active" data-step="1">
+                    <div class="form-section">
+                        <h3>YOUR INFORMATION</h3>
+                        <div class="form-group">
+                            <label for="userName">Your Name *</label>
+                            <input type="text" id="userName" name="userName" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="userEmail">Email Address *</label>
+                            <input type="email" id="userEmail" name="userEmail" required placeholder="your@email.com">
+                            <span class="helper-text">Your analysis will be sent to this email</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="userPhone">Phone Number (Optional)</label>
+                            <input type="tel" id="userPhone" name="userPhone" placeholder="(555) 123-4567">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Property Details -->
+                <div class="form-step" data-step="2">
+                    <div class="form-section">
+                        <h3>PROPERTY DETAILS</h3>
+                        <div class="form-group full-width">
+                            <label for="propertyAddress">Property Address *</label>
+                            <input type="text" id="propertyAddress" name="propertyAddress" required placeholder="123 Main Street">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="propertyCity">City *</label>
+                                <input type="text" id="propertyCity" name="propertyCity" required placeholder="Boca Raton">
+                            </div>
+                            <div class="form-group">
+                                <label for="propertyState">State</label>
+                                <input type="text" id="propertyState" name="propertyState" value="FL" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="propertyZip">ZIP Code *</label>
+                                <input type="text" id="propertyZip" name="propertyZip" required placeholder="33431">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="propertyType">Property Type *</label>
+                                <select id="propertyType" name="propertyType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Single Family">Single Family</option>
+                                    <option value="Duplex">Duplex</option>
+                                    <option value="Triplex">Triplex</option>
+                                    <option value="Fourplex">Fourplex</option>
+                                    <option value="Condo">Condo</option>
+                                    <option value="Townhouse">Townhouse</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="numUnits">Number of Units *</label>
+                                <input type="number" id="numUnits" name="numUnits" required min="1" max="10" value="1">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sqft">Square Footage *</label>
+                                <input type="number" id="sqft" name="sqft" required min="100" placeholder="1,500">
+                            </div>
+                            <div class="form-group">
+                                <label for="yearBuilt">Year Built</label>
+                                <input type="number" id="yearBuilt" name="yearBuilt" min="1800" max="2025" placeholder="1985">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bedrooms">Bedrooms *</label>
+                                <input type="number" id="bedrooms" name="bedrooms" required min="0" max="20" placeholder="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="bathrooms">Bathrooms *</label>
+                                <input type="number" id="bathrooms" name="bathrooms" required min="0" max="20" step="0.5" placeholder="2">
+                            </div>
+                            <div class="form-group">
+                                <label for="lotSize">Lot Size (acres)</label>
+                                <input type="number" id="lotSize" name="lotSize" min="0" step="0.01" placeholder="0.25">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>PURCHASE PRICE & COSTS</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="askingPrice">Asking Price</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="askingPrice" name="askingPrice" min="0" placeholder="175,000">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="purchasePrice">Purchase/Offer Price *</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="purchasePrice" name="purchasePrice" required min="0" placeholder="150,000">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="arv">After Repair Value (ARV)</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="arv" name="arv" min="0" placeholder="220,000">
+                                </div>
+                                <span class="helper-text">Estimated value after renovations</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="rehabCosts">Rehab/Renovation Costs</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="rehabCosts" name="rehabCosts" min="0" value="0" placeholder="10,000">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="closingCosts">Estimated Closing Costs</label>
+                            <div class="input-prefix">
+                                <span>$</span>
+                                <input type="number" id="closingCosts" name="closingCosts" min="0" placeholder="5,450">
+                            </div>
+                            <span class="helper-text">Typically 2-5% of purchase price</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Income Analysis -->
+                <div class="form-step" data-step="3">
+                    <div class="form-section">
+                        <h3>RENTAL INCOME</h3>
+                        <div id="unitRents">
+                            <div class="form-group">
+                                <label for="unit1Rent">Unit 1 Monthly Rent *</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="unit1Rent" name="unit1Rent" required min="0" placeholder="1,950">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calculated-field">
+                            <span>Gross Scheduled Rent (Monthly):</span>
+                            <span id="grossRentMonthly">$0</span>
+                        </div>
+                        <div class="calculated-field">
+                            <span>Gross Scheduled Rent (Annual):</span>
+                            <span id="grossRentAnnual">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>VACANCY & CREDIT LOSS</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="vacancyRate">Vacancy Rate (%)</label>
+                                <div class="input-suffix">
+                                    <input type="number" id="vacancyRate" name="vacancyRate" min="0" max="100" value="8" step="0.5">
+                                    <span>%</span>
+                                </div>
+                                <span class="helper-text">Typical: 5-10%</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="creditLoss">Credit/Collection Loss (%)</label>
+                                <div class="input-suffix">
+                                    <input type="number" id="creditLoss" name="creditLoss" min="0" max="100" value="2" step="0.5">
+                                    <span>%</span>
+                                </div>
+                                <span class="helper-text">Typical: 1-3%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>OTHER INCOME</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="laundryIncome">Laundry Income (Monthly)</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="laundryIncome" name="laundryIncome" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="parkingIncome">Parking Income (Monthly)</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="parkingIncome" name="parkingIncome" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="petFees">Pet Fees (Monthly)</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="petFees" name="petFees" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="otherIncome">Other Income (Monthly)</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="otherIncome" name="otherIncome" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calculated-field highlight">
+                            <span>Effective Gross Income (Monthly):</span>
+                            <span id="effectiveIncomeMonthly">$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Operating Expenses -->
+                <div class="form-step" data-step="4">
+                    <div class="form-section">
+                        <h3>OPERATING EXPENSES (MONTHLY)</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="propertyTaxes">Property Taxes</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="propertyTaxes" name="propertyTaxes" min="0" placeholder="250">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="insurance">Insurance</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="insurance" name="insurance" min="0" placeholder="125">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="propertyMgmt">Property Management (%)</label>
+                                <div class="input-suffix">
+                                    <input type="number" id="propertyMgmt" name="propertyMgmt" min="0" max="100" value="8" step="0.5">
+                                    <span>%</span>
+                                </div>
+                                <span class="helper-text">Typical: 8-12% of rent</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="repairs">Repairs & Maintenance (%)</label>
+                                <div class="input-suffix">
+                                    <input type="number" id="repairs" name="repairs" min="0" max="100" value="5" step="0.5">
+                                    <span>%</span>
+                                </div>
+                                <span class="helper-text">Typical: 5-10% of rent</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="capex">CapEx Reserve (%)</label>
+                                <div class="input-suffix">
+                                    <input type="number" id="capex" name="capex" min="0" max="100" value="5" step="0.5">
+                                    <span>%</span>
+                                </div>
+                                <span class="helper-text">For roof, HVAC, etc.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="utilities">Utilities (Landlord Paid)</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="utilities" name="utilities" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="waterSewer">Water/Sewer</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="waterSewer" name="waterSewer" min="0" placeholder="75">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="trash">Trash Removal</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="trash" name="trash" min="0" placeholder="50">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="lawnCare">Lawn/Pool Care</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="lawnCare" name="lawnCare" min="0" placeholder="100">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="hoaFees">HOA Fees</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="hoaFees" name="hoaFees" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pestControl">Pest Control</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="pestControl" name="pestControl" min="0" placeholder="25">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="otherExpenses">Other Expenses</label>
+                                <div class="input-prefix">
+                                    <span>$</span>
+                                    <input type="number" id="otherExpenses" name="otherExpenses" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calculated-field">
+                            <span>Total Operating Expenses (Monthly):</span>
+                            <span id="totalExpensesMonthly">$0</span>
+                        </div>
+                        <div class="calculated-field highlight">
+                            <span>Net Operating Income (Monthly):</span>
+                            <span id="noiMonthly">$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Financing -->
+                <div class="form-step" data-step="5">
+                    <div class="form-section">
+                        <h3>LOAN DETAILS</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="downPaymentPercent">Down Payment (%)</label>
+                                <div class="input-suffix">
+                                    <input type="number" id="downPaymentPercent" name="downPaymentPercent" min="0" max="100" value="25" step="0.5">
+                                    <span>%</span>
+                                </div>
+                                <span class="helper-text">Typical: 20-25% for investment</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="interestRate">Interest Rate (%)</label>
+                                <div class="input-suffix">
+                                    <input type="number" id="interestRate" name="interestRate" min="0" max="30" value="6.5" step="0.125">
+                                    <span>%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="loanTerm">Loan Term (years)</label>
+                                <select id="loanTerm" name="loanTerm">
+                                    <option value="15">15 years</option>
+                                    <option value="20">20 years</option>
+                                    <option value="30" selected>30 years</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="calculated-field">
+                            <span>Down Payment Amount:</span>
+                            <span id="downPaymentAmount">$0</span>
+                        </div>
+                        <div class="calculated-field">
+                            <span>Loan Amount:</span>
+                            <span id="loanAmount">$0</span>
+                        </div>
+                        <div class="calculated-field">
+                            <span>Monthly P&I Payment:</span>
+                            <span id="monthlyPayment">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>TOTAL CASH REQUIRED</h3>
+                        <div class="calculated-field">
+                            <span>Down Payment:</span>
+                            <span id="cashDownPayment">$0</span>
+                        </div>
+                        <div class="calculated-field">
+                            <span>Closing Costs:</span>
+                            <span id="cashClosingCosts">$0</span>
+                        </div>
+                        <div class="calculated-field">
+                            <span>Rehab Costs:</span>
+                            <span id="cashRehabCosts">$0</span>
+                        </div>
+                        <div class="calculated-field highlight">
+                            <span>Total Cash Needed:</span>
+                            <span id="totalCashNeeded">$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6: Review & Submit -->
+                <div class="form-step" data-step="6">
+                    <div class="form-section">
+                        <h3>INVESTMENT SUMMARY</h3>
+                        <div class="summary-grid">
+                            <div class="summary-card">
+                                <h4>PROPERTY</h4>
+                                <div id="summaryProperty"></div>
+                            </div>
+                            <div class="summary-card">
+                                <h4>KEY METRICS</h4>
+                                <div class="metric-row">
+                                    <span>Cap Rate:</span>
+                                    <span id="capRate" class="metric-value">0%</span>
+                                    <span id="capRateStatus" class="status-badge"></span>
+                                </div>
+                                <div class="metric-row">
+                                    <span>Cash-on-Cash Return:</span>
+                                    <span id="cashOnCash" class="metric-value">0%</span>
+                                    <span id="cashOnCashStatus" class="status-badge"></span>
+                                </div>
+                                <div class="metric-row">
+                                    <span>DSCR:</span>
+                                    <span id="dscr" class="metric-value">0</span>
+                                    <span id="dscrStatus" class="status-badge"></span>
+                                </div>
+                                <div class="metric-row">
+                                    <span>1% Rule:</span>
+                                    <span id="onePercentRule" class="metric-value">0%</span>
+                                    <span id="onePercentStatus" class="status-badge"></span>
+                                </div>
+                                <div class="metric-row">
+                                    <span>GRM:</span>
+                                    <span id="grm" class="metric-value">0</span>
+                                    <span id="grmStatus" class="status-badge"></span>
+                                </div>
+                            </div>
+                            <div class="summary-card">
+                                <h4>CASH FLOW</h4>
+                                <div class="metric-row">
+                                    <span>Monthly Cash Flow:</span>
+                                    <span id="monthlyCashFlow" class="metric-value highlight-value">$0</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span>Annual Cash Flow:</span>
+                                    <span id="annualCashFlow" class="metric-value">$0</span>
+                                </div>
+                            </div>
+                            <div class="summary-card verdict-card">
+                                <h4>DEAL VERDICT</h4>
+                                <div id="dealVerdict" class="verdict"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>QUICK RULES CHECK</h3>
+                        <div class="rules-grid">
+                            <div class="rule-item">
+                                <span class="rule-name">1% Rule</span>
+                                <span id="rule1Status" class="rule-status"></span>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-name">2% Rule</span>
+                                <span id="rule2Status" class="rule-status"></span>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-name">50% Rule</span>
+                                <span id="rule50Status" class="rule-status"></span>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-name">70% Rule (Flip)</span>
+                                <span id="rule70Status" class="rule-status"></span>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-name">Cash Flow Positive</span>
+                                <span id="cashFlowPositive" class="rule-status"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="submit-section">
+                        <p class="submit-note">Click below to receive your detailed investment analysis report via email.</p>
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <span>SEND MY ANALYSIS REPORT</span>
+                        </button>
+                        <p class="compliments">Compliments of <strong>Edmund Bogen</strong> | The Edmund Bogen Team</p>
+                    </div>
+                </div>
+
+                <!-- Form Navigation -->
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-prev" id="prevBtn" disabled>
+                        <span class="arrow">&larr;</span> PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-next" id="nextBtn">
+                        NEXT <span class="arrow">&rarr;</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">&#10003;</div>
+            <h2>ANALYSIS SENT!</h2>
+            <p>Your investment property analysis has been sent to <span id="sentEmail"></span></p>
+            <p class="modal-note">Please check your inbox (and spam folder) for your PDF report.</p>
+            <button class="btn-modal" onclick="closeModal()">CLOSE</button>
+            <p class="modal-compliments">Compliments of The Edmund Bogen Team</p>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Generating your analysis...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-circle small">EB</div>
+                <span>THE EDMUND BOGEN TEAM</span>
+            </div>
+            <div class="footer-info">
+                <p>From Palm Beach to Miami, we can help you find your next investment property.</p>
+                <p>&copy; 2024 The Edmund Bogen Team at Douglas Elliman Real Estate. All rights reserved.</p>
+            </div>
+            <div class="footer-contact">
+                <a href="https://www.bogenhomes.com" target="_blank" class="footer-link">www.bogenhomes.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/calculator.js"></script>
+</body>
+</html>
