@@ -260,7 +260,7 @@
                         <div class="form-group">
                             <label for="userEmail">Email Address *</label>
                             <input type="email" id="userEmail" name="userEmail" required placeholder="your@email.com">
-                            <span class="helper-text">Your analysis will be sent to this email</span>
+                            <span class="helper-text">For your records</span>
                         </div>
                         <div class="form-group">
                             <label for="userPhone">Phone Number (Optional)</label>
@@ -729,9 +729,9 @@
                     </div>
 
                     <div class="submit-section">
-                        <p class="submit-note">Click below to receive your detailed investment analysis report via email.</p>
+                        <p class="submit-note">Click below to download your detailed investment analysis report as a PDF.</p>
                         <button type="submit" class="btn-submit" id="submitBtn">
-                            <span>SEND MY ANALYSIS REPORT</span>
+                            <span>DOWNLOAD MY ANALYSIS REPORT</span>
                         </button>
                         <p class="compliments">Compliments of <strong>Edmund Bogen</strong> | The Edmund Bogen Team</p>
                     </div>
@@ -754,9 +754,9 @@
     <div id="successModal" class="modal">
         <div class="modal-content">
             <div class="modal-icon">&#10003;</div>
-            <h2>ANALYSIS SENT!</h2>
-            <p>Your investment property analysis has been sent to <span id="sentEmail"></span></p>
-            <p class="modal-note">Please check your inbox (and spam folder) for your PDF report.</p>
+            <h2>DOWNLOAD COMPLETE!</h2>
+            <p>Your investment property analysis for <span id="sentEmail"></span> has been downloaded.</p>
+            <p class="modal-note">Your PDF report should be in your Downloads folder.</p>
             <button class="btn-modal" onclick="closeModal()">CLOSE</button>
             <p class="modal-compliments">Compliments of The Edmund Bogen Team</p>
         </div>
@@ -978,10 +978,21 @@
             try {
                 calculateAll();
                 const response = await fetch('/api/generate-report', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(window.investmentData) });
-                const result = await response.json();
-                if (result.success) { document.getElementById('sentEmail').textContent = window.investmentData.userEmail; document.getElementById('successModal').classList.add('active'); }
-                else alert('There was an error generating your report. Please try again.');
-            } catch (error) { console.error('Error:', error); alert('There was an error sending your report. Please try again.'); }
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    const address = window.investmentData.propertyAddress.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
+                    a.download = `Investment_Analysis_${address}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    a.remove();
+                    document.getElementById('sentEmail').textContent = window.investmentData.userName;
+                    document.getElementById('successModal').classList.add('active');
+                } else { alert('There was an error generating your report. Please try again.'); }
+            } catch (error) { console.error('Error:', error); alert('There was an error generating your report. Please try again.'); }
             finally { loadingOverlay.classList.remove('active'); submitBtn.disabled = false; }
         }
     });

@@ -6,7 +6,7 @@ This application generates investment property analysis reports
 and emails them as PDFs to users.
 """
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file, make_response
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
@@ -57,17 +57,23 @@ def index():
 
 @app.route('/api/generate-report', methods=['POST'])
 def generate_report():
-    """Generate PDF report and email it to the user."""
+    """Generate PDF report and return it for download."""
     try:
         data = request.get_json()
 
         # Generate PDF
         pdf_buffer = generate_pdf(data)
 
-        # Send email
-        send_email(data, pdf_buffer)
+        # Create filename from property address
+        property_address = data.get('propertyAddress', 'Investment_Property')
+        safe_address = property_address.replace(' ', '_').replace(',', '').replace('.', '')[:30]
+        filename = f'Investment_Analysis_{safe_address}.pdf'
 
-        return jsonify({'success': True, 'message': 'Report sent successfully!'})
+        # Return PDF as downloadable file
+        response = make_response(pdf_buffer.getvalue())
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = f'attachment; filename="{filename}"'
+        return response
 
     except Exception as e:
         print(f"Error generating report: {str(e)}")
