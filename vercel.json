@@ -6,22 +6,22 @@
       "use": "@vercel/python"
     },
     {
-      "src": "public/**",
+      "src": "public/css/styles.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/js/calculator.js",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/css/(.*)",
-      "dest": "/public/css/$1"
+      "src": "/css/styles.css",
+      "dest": "/public/css/styles.css"
     },
     {
-      "src": "/js/(.*)",
-      "dest": "/public/js/$1"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/app.py"
+      "src": "/js/calculator.js",
+      "dest": "/public/js/calculator.js"
     },
     {
       "src": "/(.*)",
