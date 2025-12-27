@@ -4,8 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Investment Property Analyzer | Edmund Bogen Team</title>
-    <link rel="stylesheet" href="/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    /* Edmund Bogen Brand CSS - Investment Property Analyzer */
+    :root {
+        --navy: #1a3e5c;
+        --navy-light: #2a5a7c;
+        --navy-dark: #0f2a3f;
+        --cyan: #00a8e1;
+        --cyan-hover: #0095c8;
+        --cyan-light: rgba(0, 168, 225, 0.1);
+        --white: #ffffff;
+        --light-gray: #f4f4f4;
+        --medium-gray: #e8e8e8;
+        --dark-gray: #333333;
+        --black: #000000;
+        --success: #28a745;
+        --warning: #ffc107;
+        --danger: #dc3545;
+        --info: #17a2b8;
+        --font-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+        --spacing-xs: 8px;
+        --spacing-sm: 16px;
+        --spacing-md: 24px;
+        --spacing-lg: 40px;
+        --spacing-xl: 60px;
+        --spacing-xxl: 80px;
+        --transition-fast: 0.2s ease;
+        --transition-normal: 0.3s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-primary); font-size: 16px; line-height: 1.6; color: var(--dark-gray); background-color: var(--white); }
+    .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--navy); padding: var(--spacing-sm) var(--spacing-lg); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+    .header-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .logo { display: flex; align-items: center; gap: var(--spacing-sm); }
+    .logo-circle { width: 50px; height: 50px; border-radius: 50%; background: var(--white); color: var(--navy); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 18px; letter-spacing: 0.05em; }
+    .logo-circle.small { width: 40px; height: 40px; font-size: 14px; }
+    .logo-text { display: flex; flex-direction: column; }
+    .team-name { color: var(--white); font-size: 14px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+    .company-name { color: rgba(255, 255, 255, 0.7); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+    .nav-link { color: var(--white); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; padding: var(--spacing-xs) var(--spacing-sm); border: 1px solid var(--cyan); transition: var(--transition-fast); }
+    .nav-link:hover { background: var(--cyan); color: var(--white); }
+    .hero { position: relative; height: 60vh; min-height: 400px; background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%); display: flex; align-items: center; justify-content: center; margin-top: 82px; overflow: hidden; }
+    .hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(26, 62, 92, 0.3) 0%, rgba(26, 62, 92, 0.8) 100%); }
+    .hero-content { position: relative; z-index: 1; text-align: center; padding: var(--spacing-lg); }
+    .hero-content h1 { color: var(--white); font-size: clamp(28px, 5vw, 48px); font-weight: 300; letter-spacing: 0.15em; margin-bottom: var(--spacing-md); text-transform: uppercase; }
+    .hero-content p { color: rgba(255, 255, 255, 0.9); font-size: 18px; font-weight: 300; max-width: 600px; margin: 0 auto; }
+    .scroll-indicator { margin-top: var(--spacing-xl); color: var(--white); font-size: 12px; letter-spacing: 0.15em; animation: bounce 2s infinite; }
+    .chevron { width: 24px; height: 24px; margin: var(--spacing-sm) auto 0; border-right: 2px solid var(--cyan); border-bottom: 2px solid var(--cyan); transform: rotate(45deg); }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
+    .main-content { padding: var(--spacing-xxl) var(--spacing-lg); background: var(--light-gray); }
+    .container { max-width: 900px; margin: 0 auto; }
+    .intro-section { text-align: center; margin-bottom: var(--spacing-xl); position: relative; }
+    .accent-bar { width: 4px; height: 60px; background: var(--cyan); margin: 0 auto var(--spacing-md); }
+    .intro-section h2 { font-size: 28px; font-weight: 400; letter-spacing: 0.1em; color: var(--navy); margin-bottom: var(--spacing-sm); }
+    .intro-section p { color: var(--dark-gray); font-size: 16px; max-width: 600px; margin: 0 auto; }
+    .progress-steps { display: flex; justify-content: center; gap: var(--spacing-xs); margin-bottom: var(--spacing-xl); flex-wrap: wrap; }
+    .step { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-xs); padding: var(--spacing-sm); opacity: 0.5; transition: var(--transition-normal); }
+    .step.active { opacity: 1; }
+    .step.completed { opacity: 1; }
+    .step.completed .step-number { background: var(--success); border-color: var(--success); }
+    .step-number { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--navy); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; color: var(--navy); background: var(--white); transition: var(--transition-normal); }
+    .step.active .step-number { background: var(--cyan); border-color: var(--cyan); color: var(--white); }
+    .step span { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; color: var(--navy); text-transform: uppercase; }
+    .investment-form { background: var(--white); border-radius: 4px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); padding: var(--spacing-xl); }
+    .form-step { display: none; }
+    .form-step.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .form-section { margin-bottom: var(--spacing-lg); padding-bottom: var(--spacing-lg); border-bottom: 1px solid var(--medium-gray); }
+    .form-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .form-section h3 { font-size: 16px; font-weight: 600; letter-spacing: 0.1em; color: var(--navy); margin-bottom: var(--spacing-md); padding-left: var(--spacing-sm); border-left: 3px solid var(--cyan); }
+    .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); }
+    .form-group { margin-bottom: var(--spacing-md); }
+    .form-group.full-width { grid-column: 1 / -1; }
+    .form-group label { display: block; font-size: 13px; font-weight: 500; color: var(--dark-gray); margin-bottom: var(--spacing-xs); letter-spacing: 0.02em; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; font-family: var(--font-primary); font-size: 15px; border: 1px solid var(--medium-gray); border-radius: 4px; background: var(--white); color: var(--dark-gray); transition: var(--transition-fast); }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px var(--cyan-light); }
+    .form-group input::placeholder { color: #aaa; }
+    .form-group input[readonly] { background: var(--light-gray); cursor: not-allowed; }
+    .input-prefix, .input-suffix { display: flex; align-items: stretch; }
+    .input-prefix span, .input-suffix span { display: flex; align-items: center; padding: 0 12px; background: var(--light-gray); border: 1px solid var(--medium-gray); color: var(--dark-gray); font-weight: 500; }
+    .input-prefix span { border-right: none; border-radius: 4px 0 0 4px; }
+    .input-prefix input { border-radius: 0 4px 4px 0; }
+    .input-suffix span { border-left: none; border-radius: 0 4px 4px 0; }
+    .input-suffix input { border-radius: 4px 0 0 4px; }
+    .helper-text { display: block; font-size: 11px; color: #888; margin-top: 4px; font-style: italic; }
+    .calculated-field { display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-sm); background: var(--light-gray); border-radius: 4px; margin-top: var(--spacing-sm); font-size: 14px; }
+    .calculated-field.highlight { background: var(--navy); color: var(--white); }
+    .calculated-field.highlight span:last-child { font-weight: 600; color: var(--cyan); }
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-md); }
+    .summary-card { background: var(--light-gray); border-radius: 4px; padding: var(--spacing-md); }
+    .summary-card h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--navy); margin-bottom: var(--spacing-sm); padding-bottom: var(--spacing-xs); border-bottom: 2px solid var(--cyan); }
+    .metric-row { display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-xs) 0; font-size: 14px; flex-wrap: wrap; gap: var(--spacing-xs); }
+    .metric-value { font-weight: 600; color: var(--navy); }
+    .metric-value.highlight-value { font-size: 20px; color: var(--cyan); }
+    .status-badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .status-badge.pass { background: rgba(40, 167, 69, 0.1); color: var(--success); }
+    .status-badge.review { background: rgba(255, 193, 7, 0.1); color: #b38600; }
+    .status-badge.fail { background: rgba(220, 53, 69, 0.1); color: var(--danger); }
+    .verdict-card { background: var(--navy); }
+    .verdict-card h4 { color: var(--white); border-color: var(--cyan); }
+    .verdict { font-size: 24px; font-weight: 600; text-align: center; padding: var(--spacing-md); color: var(--white); letter-spacing: 0.1em; }
+    .verdict.strong-buy { color: var(--success); }
+    .verdict.consider { color: var(--cyan); }
+    .verdict.review { color: var(--warning); }
+    .verdict.pass { color: var(--danger); }
+    .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-sm); }
+    .rule-item { display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-sm); background: var(--light-gray); border-radius: 4px; font-size: 13px; }
+    .rule-name { font-weight: 500; color: var(--navy); }
+    .rule-status { font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .rule-status.pass { color: var(--success); }
+    .rule-status.fail { color: var(--danger); }
+    .rule-status.review { color: #b38600; }
+    .submit-section { text-align: center; margin-top: var(--spacing-xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--medium-gray); }
+    .submit-note { font-size: 14px; color: var(--dark-gray); margin-bottom: var(--spacing-md); }
+    .btn-submit { display: inline-block; padding: 18px 60px; background: var(--cyan); color: var(--white); font-family: var(--font-primary); font-size: 14px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; border: none; border-radius: 4px; cursor: pointer; transition: var(--transition-fast); }
+    .btn-submit:hover { background: var(--cyan-hover); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 168, 225, 0.3); }
+    .btn-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+    .compliments { margin-top: var(--spacing-md); font-size: 13px; color: #888; }
+    .compliments strong { color: var(--navy); }
+    .form-navigation { display: flex; justify-content: space-between; margin-top: var(--spacing-lg); padding-top: var(--spacing-lg); border-top: 1px solid var(--medium-gray); }
+    .btn-nav { display: flex; align-items: center; gap: var(--spacing-xs); padding: 14px 28px; font-family: var(--font-primary); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border: none; border-radius: 4px; cursor: pointer; transition: var(--transition-fast); }
+    .btn-prev { background: var(--white); color: var(--navy); border: 1px solid var(--navy); }
+    .btn-prev:hover:not(:disabled) { background: var(--navy); color: var(--white); }
+    .btn-next { background: var(--navy); color: var(--white); }
+    .btn-next:hover:not(:disabled) { background: var(--navy-dark); }
+    .btn-nav:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-nav .arrow { font-size: 16px; }
+    .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); z-index: 2000; align-items: center; justify-content: center; padding: var(--spacing-lg); }
+    .modal.active { display: flex; }
+    .modal-content { background: var(--white); border-radius: 8px; padding: var(--spacing-xl); max-width: 500px; width: 100%; text-align: center; animation: modalIn 0.3s ease; }
+    @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    .modal-icon { width: 80px; height: 80px; border-radius: 50%; background: var(--success); color: var(--white); font-size: 40px; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--spacing-md); }
+    .modal-content h2 { font-size: 24px; font-weight: 600; letter-spacing: 0.1em; color: var(--navy); margin-bottom: var(--spacing-sm); }
+    .modal-content p { color: var(--dark-gray); margin-bottom: var(--spacing-sm); }
+    .modal-note { font-size: 13px; color: #888; }
+    .btn-modal { display: inline-block; margin-top: var(--spacing-md); padding: 14px 40px; background: var(--cyan); color: var(--white); font-family: var(--font-primary); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border: none; border-radius: 4px; cursor: pointer; transition: var(--transition-fast); }
+    .btn-modal:hover { background: var(--cyan-hover); }
+    .modal-compliments { margin-top: var(--spacing-md); font-size: 12px; color: #888; }
+    .loading-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26, 62, 92, 0.95); z-index: 1500; align-items: center; justify-content: center; }
+    .loading-overlay.active { display: flex; }
+    .loading-content { text-align: center; color: var(--white); }
+    .spinner { width: 50px; height: 50px; border: 3px solid rgba(255, 255, 255, 0.2); border-top-color: var(--cyan); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto var(--spacing-md); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-content p { font-size: 16px; letter-spacing: 0.05em; }
+    .footer { background: var(--navy); padding: var(--spacing-xl) var(--spacing-lg); }
+    .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-lg); align-items: center; }
+    .footer-logo { display: flex; align-items: center; gap: var(--spacing-sm); color: var(--white); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; }
+    .footer-info p { color: rgba(255, 255, 255, 0.7); font-size: 13px; margin-bottom: var(--spacing-xs); }
+    .footer-link { color: var(--cyan); text-decoration: none; font-size: 14px; letter-spacing: 0.05em; transition: var(--transition-fast); }
+    .footer-link:hover { color: var(--white); }
+    @media (max-width: 768px) {
+        .header { padding: var(--spacing-sm); }
+        .logo-text { display: none; }
+        .hero { height: 50vh; min-height: 350px; }
+        .main-content { padding: var(--spacing-lg) var(--spacing-sm); }
+        .investment-form { padding: var(--spacing-md); }
+        .progress-steps { gap: 4px; }
+        .step { padding: var(--spacing-xs); }
+        .step span { font-size: 9px; }
+        .step-number { width: 32px; height: 32px; font-size: 12px; }
+        .form-row { grid-template-columns: 1fr; }
+        .form-navigation { flex-direction: column; gap: var(--spacing-sm); }
+        .btn-nav { width: 100%; justify-content: center; }
+        .summary-grid { grid-template-columns: 1fr; }
+        .rules-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+        .hero-content h1 { font-size: 24px; letter-spacing: 0.1em; }
+        .hero-content p { font-size: 14px; }
+        .intro-section h2 { font-size: 22px; }
+        .rules-grid { grid-template-columns: 1fr; }
+        .btn-submit { width: 100%; padding: 16px 20px; }
+    }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -614,6 +787,207 @@
         </div>
     </footer>
 
-    <script src="/js/calculator.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('investmentForm');
+        const steps = document.querySelectorAll('.form-step');
+        const progressSteps = document.querySelectorAll('.step');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const numUnitsInput = document.getElementById('numUnits');
+        let currentStep = 1;
+        const totalSteps = 6;
+        updateNavigation();
+        setupEventListeners();
+        calculateAll();
+        function setupEventListeners() {
+            prevBtn.addEventListener('click', () => navigateStep(-1));
+            nextBtn.addEventListener('click', () => navigateStep(1));
+            form.addEventListener('submit', handleSubmit);
+            numUnitsInput.addEventListener('change', updateUnitRentFields);
+            const inputs = form.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('input', debounce(calculateAll, 300));
+                input.addEventListener('change', calculateAll);
+            });
+        }
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => { clearTimeout(timeout); func(...args); };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        function navigateStep(direction) {
+            const newStep = currentStep + direction;
+            if (direction > 0 && !validateStep(currentStep)) return;
+            if (newStep >= 1 && newStep <= totalSteps) {
+                currentStep = newStep;
+                updateStepDisplay();
+                updateNavigation();
+                if (currentStep === 6) { calculateAll(); updateSummary(); }
+                form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        function updateStepDisplay() {
+            steps.forEach((step, index) => { step.classList.remove('active'); if (index + 1 === currentStep) step.classList.add('active'); });
+            progressSteps.forEach((step, index) => { step.classList.remove('active', 'completed'); if (index + 1 === currentStep) step.classList.add('active'); else if (index + 1 < currentStep) step.classList.add('completed'); });
+        }
+        function updateNavigation() {
+            prevBtn.disabled = currentStep === 1;
+            if (currentStep === totalSteps) nextBtn.style.display = 'none'; else nextBtn.style.display = 'flex';
+        }
+        function validateStep(step) {
+            const currentStepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+            const requiredInputs = currentStepEl.querySelectorAll('[required]');
+            let isValid = true;
+            requiredInputs.forEach(input => { if (!input.value.trim()) { isValid = false; input.classList.add('error'); input.addEventListener('input', function removeError() { input.classList.remove('error'); input.removeEventListener('input', removeError); }, { once: true }); } });
+            if (!isValid) alert('Please fill in all required fields before continuing.');
+            return isValid;
+        }
+        function updateUnitRentFields() {
+            const numUnits = parseInt(numUnitsInput.value) || 1;
+            const container = document.getElementById('unitRents');
+            container.innerHTML = '';
+            for (let i = 1; i <= numUnits; i++) {
+                const fieldHtml = `<div class="form-group"><label for="unit${i}Rent">Unit ${i} Monthly Rent ${i === 1 ? '*' : ''}</label><div class="input-prefix"><span>$</span><input type="number" id="unit${i}Rent" name="unit${i}Rent" ${i === 1 ? 'required' : ''} min="0" placeholder="1,950"></div></div>`;
+                container.insertAdjacentHTML('beforeend', fieldHtml);
+            }
+            container.querySelectorAll('input').forEach(input => { input.addEventListener('input', debounce(calculateAll, 300)); input.addEventListener('change', calculateAll); });
+        }
+        function getNum(id, defaultVal = 0) { const el = document.getElementById(id); return el ? (parseFloat(el.value) || defaultVal) : defaultVal; }
+        function formatCurrency(amount) { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(amount); }
+        function formatPercent(value) { return (value * 100).toFixed(2) + '%'; }
+        function calculateAll() {
+            const purchasePrice = getNum('purchasePrice');
+            const arv = getNum('arv') || purchasePrice;
+            const rehabCosts = getNum('rehabCosts');
+            const closingCosts = getNum('closingCosts');
+            const numUnits = parseInt(getNum('numUnits', 1));
+            let grossRentMonthly = 0;
+            for (let i = 1; i <= numUnits; i++) grossRentMonthly += getNum(`unit${i}Rent`);
+            const grossRentAnnual = grossRentMonthly * 12;
+            const vacancyRate = getNum('vacancyRate') / 100;
+            const creditLoss = getNum('creditLoss') / 100;
+            const vacancyLoss = grossRentMonthly * vacancyRate;
+            const creditLossAmount = grossRentMonthly * creditLoss;
+            const otherIncomeMonthly = getNum('laundryIncome') + getNum('parkingIncome') + getNum('petFees') + getNum('otherIncome');
+            const effectiveIncomeMonthly = grossRentMonthly - vacancyLoss - creditLossAmount + otherIncomeMonthly;
+            const propertyTaxes = getNum('propertyTaxes');
+            const insurance = getNum('insurance');
+            const propertyMgmt = grossRentMonthly * (getNum('propertyMgmt') / 100);
+            const repairs = grossRentMonthly * (getNum('repairs') / 100);
+            const capex = grossRentMonthly * (getNum('capex') / 100);
+            const utilities = getNum('utilities');
+            const waterSewer = getNum('waterSewer');
+            const trash = getNum('trash');
+            const lawnCare = getNum('lawnCare');
+            const hoaFees = getNum('hoaFees');
+            const pestControl = getNum('pestControl');
+            const otherExpenses = getNum('otherExpenses');
+            const totalExpensesMonthly = propertyTaxes + insurance + propertyMgmt + repairs + capex + utilities + waterSewer + trash + lawnCare + hoaFees + pestControl + otherExpenses;
+            const noiMonthly = effectiveIncomeMonthly - totalExpensesMonthly;
+            const noiAnnual = noiMonthly * 12;
+            const downPaymentPercent = getNum('downPaymentPercent') / 100;
+            const interestRate = getNum('interestRate') / 100;
+            const loanTermYears = getNum('loanTerm');
+            const downPayment = purchasePrice * downPaymentPercent;
+            const loanAmount = purchasePrice - downPayment;
+            const monthlyRate = interestRate / 12;
+            const numPayments = loanTermYears * 12;
+            let monthlyPayment = 0;
+            if (loanAmount > 0 && monthlyRate > 0) monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+            const annualDebtService = monthlyPayment * 12;
+            const totalCashNeeded = downPayment + closingCosts + rehabCosts;
+            const monthlyCashFlow = noiMonthly - monthlyPayment;
+            const annualCashFlow = monthlyCashFlow * 12;
+            const capRate = purchasePrice > 0 ? noiAnnual / purchasePrice : 0;
+            const cashOnCash = totalCashNeeded > 0 ? annualCashFlow / totalCashNeeded : 0;
+            const dscr = annualDebtService > 0 ? noiAnnual / annualDebtService : 0;
+            const grm = grossRentAnnual > 0 ? purchasePrice / grossRentAnnual : 0;
+            const onePercentRule = purchasePrice > 0 ? grossRentMonthly / purchasePrice : 0;
+            const expenseRatio = grossRentMonthly > 0 ? totalExpensesMonthly / grossRentMonthly : 0;
+            const rule70Max = (arv * 0.7) - rehabCosts;
+            updateElement('grossRentMonthly', formatCurrency(grossRentMonthly));
+            updateElement('grossRentAnnual', formatCurrency(grossRentAnnual));
+            updateElement('effectiveIncomeMonthly', formatCurrency(effectiveIncomeMonthly));
+            updateElement('totalExpensesMonthly', formatCurrency(totalExpensesMonthly));
+            updateElement('noiMonthly', formatCurrency(noiMonthly));
+            updateElement('downPaymentAmount', formatCurrency(downPayment));
+            updateElement('loanAmount', formatCurrency(loanAmount));
+            updateElement('monthlyPayment', formatCurrency(monthlyPayment));
+            updateElement('cashDownPayment', formatCurrency(downPayment));
+            updateElement('cashClosingCosts', formatCurrency(closingCosts));
+            updateElement('cashRehabCosts', formatCurrency(rehabCosts));
+            updateElement('totalCashNeeded', formatCurrency(totalCashNeeded));
+            updateElement('capRate', formatPercent(capRate));
+            updateElement('cashOnCash', formatPercent(cashOnCash));
+            updateElement('dscr', dscr.toFixed(2));
+            updateElement('onePercentRule', formatPercent(onePercentRule));
+            updateElement('grm', grm.toFixed(2));
+            updateElement('monthlyCashFlow', formatCurrency(monthlyCashFlow));
+            updateElement('annualCashFlow', formatCurrency(annualCashFlow));
+            updateStatusBadge('capRateStatus', capRate >= 0.08 ? 'pass' : (capRate >= 0.06 ? 'review' : 'fail'), capRate >= 0.08 ? 'Good' : (capRate >= 0.06 ? 'Average' : 'Low'));
+            updateStatusBadge('cashOnCashStatus', cashOnCash >= 0.10 ? 'pass' : (cashOnCash >= 0.06 ? 'review' : 'fail'), cashOnCash >= 0.10 ? 'Good' : (cashOnCash >= 0.06 ? 'Average' : 'Low'));
+            updateStatusBadge('dscrStatus', dscr >= 1.25 ? 'pass' : (dscr >= 1.0 ? 'review' : 'fail'), dscr >= 1.25 ? 'Strong' : (dscr >= 1.0 ? 'Marginal' : 'Weak'));
+            updateStatusBadge('onePercentStatus', onePercentRule >= 0.01 ? 'pass' : 'fail', onePercentRule >= 0.01 ? 'Pass' : 'Fail');
+            updateStatusBadge('grmStatus', grm <= 12 ? 'pass' : 'fail', grm <= 12 ? 'Good' : 'High');
+            updateRuleStatus('rule1Status', onePercentRule >= 0.01);
+            updateRuleStatus('rule2Status', onePercentRule >= 0.02);
+            updateRuleStatus('rule50Status', expenseRatio <= 0.50);
+            updateRuleStatus('rule70Status', purchasePrice <= rule70Max);
+            updateRuleStatus('cashFlowPositive', monthlyCashFlow > 0);
+            updateDealVerdict(capRate, cashOnCash, dscr, monthlyCashFlow);
+            window.investmentData = { userName: document.getElementById('userName')?.value || '', userEmail: document.getElementById('userEmail')?.value || '', userPhone: document.getElementById('userPhone')?.value || '', propertyAddress: document.getElementById('propertyAddress')?.value || '', propertyCity: document.getElementById('propertyCity')?.value || '', propertyState: document.getElementById('propertyState')?.value || 'FL', propertyZip: document.getElementById('propertyZip')?.value || '', propertyType: document.getElementById('propertyType')?.value || '', numUnits: numUnits, sqft: getNum('sqft'), yearBuilt: getNum('yearBuilt'), bedrooms: getNum('bedrooms'), bathrooms: getNum('bathrooms'), lotSize: getNum('lotSize'), askingPrice: getNum('askingPrice'), purchasePrice: purchasePrice, arv: arv, rehabCosts: rehabCosts, closingCosts: closingCosts, grossRentMonthly: grossRentMonthly, grossRentAnnual: grossRentAnnual, vacancyRate: vacancyRate, creditLoss: creditLoss, otherIncomeMonthly: otherIncomeMonthly, effectiveIncomeMonthly: effectiveIncomeMonthly, effectiveIncomeAnnual: effectiveIncomeMonthly * 12, propertyTaxes: propertyTaxes, insurance: insurance, propertyMgmt: propertyMgmt, repairs: repairs, capex: capex, utilities: utilities, waterSewer: waterSewer, trash: trash, lawnCare: lawnCare, hoaFees: hoaFees, pestControl: pestControl, otherExpenses: otherExpenses, totalExpensesMonthly: totalExpensesMonthly, totalExpensesAnnual: totalExpensesMonthly * 12, noiMonthly: noiMonthly, noiAnnual: noiAnnual, downPaymentPercent: downPaymentPercent, interestRate: interestRate, loanTermYears: loanTermYears, downPayment: downPayment, loanAmount: loanAmount, monthlyPayment: monthlyPayment, annualDebtService: annualDebtService, totalCashNeeded: totalCashNeeded, monthlyCashFlow: monthlyCashFlow, annualCashFlow: annualCashFlow, capRate: capRate, cashOnCash: cashOnCash, dscr: dscr, grm: grm, onePercentRule: onePercentRule, expenseRatio: expenseRatio, rule1Pass: onePercentRule >= 0.01, rule2Pass: onePercentRule >= 0.02, rule50Pass: expenseRatio <= 0.50, rule70Pass: purchasePrice <= rule70Max, cashFlowPositivePass: monthlyCashFlow > 0 };
+        }
+        function updateElement(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+        function updateStatusBadge(id, status, text) { const el = document.getElementById(id); if (el) { el.className = 'status-badge ' + status; el.textContent = text; } }
+        function updateRuleStatus(id, passed) { const el = document.getElementById(id); if (el) { el.className = 'rule-status ' + (passed ? 'pass' : 'fail'); el.textContent = passed ? 'PASS' : 'FAIL'; } }
+        function updateDealVerdict(capRate, cashOnCash, dscr, monthlyCashFlow) {
+            const verdictEl = document.getElementById('dealVerdict');
+            if (!verdictEl) return;
+            let score = 0;
+            if (capRate >= 0.08) score += 2; else if (capRate >= 0.06) score += 1;
+            if (cashOnCash >= 0.10) score += 2; else if (cashOnCash >= 0.06) score += 1;
+            if (dscr >= 1.25) score += 2; else if (dscr >= 1.0) score += 1;
+            if (monthlyCashFlow >= 200) score += 2; else if (monthlyCashFlow > 0) score += 1;
+            let verdict, className;
+            if (score >= 7) { verdict = 'STRONG BUY'; className = 'strong-buy'; }
+            else if (score >= 5) { verdict = 'CONSIDER'; className = 'consider'; }
+            else if (score >= 3) { verdict = 'REVIEW'; className = 'review'; }
+            else { verdict = 'PASS'; className = 'pass'; }
+            verdictEl.textContent = verdict;
+            verdictEl.className = 'verdict ' + className;
+            if (window.investmentData) window.investmentData.verdict = verdict;
+        }
+        function updateSummary() {
+            const summaryProperty = document.getElementById('summaryProperty');
+            if (summaryProperty && window.investmentData) {
+                const data = window.investmentData;
+                summaryProperty.innerHTML = `<p><strong>${data.propertyAddress}</strong></p><p>${data.propertyCity}, ${data.propertyState} ${data.propertyZip}</p><p>${data.propertyType} | ${data.bedrooms} Bed | ${data.bathrooms} Bath | ${data.sqft?.toLocaleString()} SF</p><p>Purchase: ${formatCurrency(data.purchasePrice)}</p>`;
+            }
+        }
+        async function handleSubmit(e) {
+            e.preventDefault();
+            if (!validateStep(1) || !validateStep(2) || !validateStep(3)) return;
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('active');
+            submitBtn.disabled = true;
+            try {
+                calculateAll();
+                const response = await fetch('/api/generate-report', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(window.investmentData) });
+                const result = await response.json();
+                if (result.success) { document.getElementById('sentEmail').textContent = window.investmentData.userEmail; document.getElementById('successModal').classList.add('active'); }
+                else alert('There was an error generating your report. Please try again.');
+            } catch (error) { console.error('Error:', error); alert('There was an error sending your report. Please try again.'); }
+            finally { loadingOverlay.classList.remove('active'); submitBtn.disabled = false; }
+        }
+    });
+    function closeModal() { document.getElementById('successModal').classList.remove('active'); }
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+    document.getElementById('successModal')?.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+    </script>
 </body>
 </html>
